@@ -1,0 +1,330 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: 'Source Sans 3', 'Segoe UI', system-ui, sans-serif;
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --color-museum-ink: #2c2419;
+  --color-museum-paper: #f7f2ea;
+  --color-museum-cream: #faf6f0;
+  --color-museum-warm: #e8dfd0;
+  --color-museum-gold: #c9a86c;
+  --color-museum-amber: #d4a574;
+  --color-museum-copper: #8b5e3c;
+  --color-museum-teal: #5c7a6a;
+  --color-museum-sage: #6b8f7a;
+  --color-museum-rose: #9c5c5c;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--color-museum-paper);
+  color: var(--color-museum-ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+/* ─── Оболочка карты (цифровой музей) ─── */
+.museum-map-frame {
+  position: relative;
+  height: 100%;
+  min-height: 280px;
+  background: linear-gradient(
+    145deg,
+    #ebe3d6 0%,
+    var(--color-museum-paper) 45%,
+    #e5dccf 100%
+  );
+  box-shadow:
+    inset 0 0 0 1px rgb(139 94 60 / 0.12),
+    0 8px 32px rgb(44 36 25 / 0.08);
+}
+
+.museum-map-frame::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+  border-radius: inherit;
+  box-shadow: inset 0 0 80px rgb(139 94 60 / 0.06);
+}
+
+.museum-map-shell {
+  overflow: hidden;
+  border-radius: 0;
+}
+
+@media (min-width: 640px) {
+  .museum-map-shell {
+    border-radius: 1rem 0 0 1rem;
+  }
+}
+
+.museum-map-shell--focused .leaflet-tile-pane {
+  filter: sepia(0.2) saturate(0.9) brightness(1.03) contrast(0.97);
+}
+
+/* Тёплый слой поверх тайлов */
+.museum-map-warmth {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: linear-gradient(
+    180deg,
+    rgb(212 165 116 / 0.08) 0%,
+    transparent 35%,
+    rgb(139 94 60 / 0.06) 100%
+  );
+  mix-blend-mode: multiply;
+}
+
+.museum-map-vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  background: radial-gradient(
+    ellipse 85% 75% at 50% 45%,
+    transparent 40%,
+    rgb(44 36 25 / 0.14) 100%
+  );
+}
+
+.museum-map-legend {
+  position: absolute;
+  left: 0.75rem;
+  bottom: 0.75rem;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.55rem 0.85rem;
+  border-radius: 0.75rem;
+  background: rgb(247 242 234 / 0.92);
+  border: 1px solid rgb(139 94 60 / 0.15);
+  box-shadow: 0 4px 20px rgb(44 36 25 / 0.1);
+  backdrop-filter: blur(8px);
+}
+
+@media (max-width: 640px) {
+  .museum-map-legend {
+    left: 0.5rem;
+    bottom: 4.5rem;
+    max-width: calc(100% - 4rem);
+  }
+}
+
+.museum-map-legend__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--color-museum-copper);
+  box-shadow: 0 0 0 3px rgb(201 168 108 / 0.35);
+  flex-shrink: 0;
+}
+
+.museum-map-legend__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--color-museum-ink);
+  line-height: 1.2;
+}
+
+.museum-map-legend__sub {
+  margin: 0;
+  font-size: 0.65rem;
+  color: rgb(44 36 25 / 0.55);
+  letter-spacing: 0.02em;
+}
+
+/* Leaflet: музейная карта */
+.leaflet-museum,
+.leaflet-container.museum-map {
+  width: 100%;
+  height: 100%;
+  font-family: inherit;
+  background: #e8dfd0 !important;
+}
+
+.leaflet-museum .leaflet-tile-pane {
+  filter: sepia(0.14) saturate(0.88) hue-rotate(-6deg) brightness(1.04);
+  transition: filter 0.6s ease;
+}
+
+.leaflet-museum .leaflet-control-attribution {
+  font-size: 9px;
+  background: rgb(247 242 234 / 0.75) !important;
+  color: rgb(44 36 25 / 0.45) !important;
+  border-radius: 6px 0 0 0;
+  padding: 2px 6px !important;
+  backdrop-filter: blur(4px);
+}
+
+.leaflet-museum .leaflet-control-attribution a {
+  color: var(--color-museum-copper) !important;
+}
+
+/* Зум */
+.leaflet-museum .leaflet-control-zoom {
+  border: none !important;
+  box-shadow: 0 4px 20px rgb(44 36 25 / 0.12) !important;
+  border-radius: 12px !important;
+  overflow: hidden;
+  margin: 0 12px 12px 0 !important;
+}
+
+.leaflet-museum .leaflet-control-zoom a {
+  width: 36px !important;
+  height: 36px !important;
+  line-height: 36px !important;
+  background: rgb(247 242 234 / 0.95) !important;
+  color: var(--color-museum-copper) !important;
+  border-bottom: 1px solid rgb(139 94 60 / 0.12) !important;
+  transition: background 0.2s, color 0.2s;
+}
+
+.leaflet-museum .leaflet-control-zoom a:hover {
+  background: var(--color-museum-warm) !important;
+  color: var(--color-museum-ink) !important;
+}
+
+@media (max-width: 640px) {
+  .leaflet-museum .leaflet-control-zoom {
+    margin-bottom: 5rem !important;
+    margin-right: 0.5rem !important;
+  }
+}
+
+/* Кольца выделения */
+@keyframes museum-ring-pulse {
+  0% {
+    stroke-opacity: 0.75;
+    fill-opacity: 0.14;
+  }
+  50% {
+    stroke-opacity: 0.35;
+    fill-opacity: 0.28;
+  }
+  100% {
+    stroke-opacity: 0.75;
+    fill-opacity: 0.14;
+  }
+}
+
+.leaflet-museum .museum-ring--outer path {
+  animation: museum-ring-pulse 2.6s ease-in-out infinite;
+}
+
+.leaflet-museum .museum-ring--inner path {
+  animation: museum-ring-pulse 2.6s ease-in-out infinite 0.35s;
+}
+
+/* Кастомные маркеры */
+.museum-marker-leaflet {
+  background: transparent !important;
+  border: none !important;
+}
+
+.museum-marker {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  cursor: pointer;
+  transition:
+    transform 0.35s cubic-bezier(0.34, 1.4, 0.64, 1),
+    filter 0.3s ease;
+}
+
+.museum-marker:hover {
+  transform: translateY(-4px) scale(1.06);
+  filter: drop-shadow(0 6px 10px rgb(61 41 20 / 0.28));
+}
+
+.museum-marker--selected {
+  transform: translateY(-6px) scale(1.12);
+  filter: drop-shadow(0 8px 14px rgb(201 168 108 / 0.45));
+  z-index: 1000 !important;
+}
+
+.museum-marker__halo {
+  position: absolute;
+  bottom: 2px;
+  left: 50%;
+  width: 52px;
+  height: 52px;
+  margin-left: -26px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgb(212 165 116 / 0.55) 0%,
+    transparent 70%
+  );
+  animation: museum-marker-halo 2s ease-out infinite;
+  pointer-events: none;
+}
+
+@keyframes museum-marker-halo {
+  0% {
+    transform: scale(0.6);
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(1.8);
+    opacity: 0;
+  }
+}
+
+.museum-marker__svg {
+  display: block;
+  position: relative;
+  z-index: 1;
+}
+
+.museum-marker--selected .museum-marker__svg {
+  animation: museum-marker-bob 2.5s ease-in-out infinite;
+}
+
+@keyframes museum-marker-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+.field-input {
+  width: 100%;
+  border-radius: 0.5rem;
+  border: 1px solid rgb(44 36 25 / 0.15);
+  background: white;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  outline: none;
+}
+
+.field-input:focus {
+  border-color: var(--color-museum-copper);
+}
+
+.prose-museum p:first-of-type::first-letter {
+  float: left;
+  margin-right: 0.08em;
+  font-family: var(--font-display);
+  font-size: 3.2rem;
+  line-height: 0.85;
+  color: var(--color-museum-copper);
+}

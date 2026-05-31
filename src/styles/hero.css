@@ -1,0 +1,385 @@
+/* Hero — цифровой музей, рабочий стол архивиста */
+
+.hero-museum {
+  position: relative;
+  min-height: 100dvh;
+  overflow: hidden;
+  background: #1f1812;
+}
+
+.hero-museum__paper {
+  position: absolute;
+  inset: 0;
+  background-color: #2c2419;
+  background-image:
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E"),
+    radial-gradient(ellipse 120% 80% at 20% 30%, rgb(212 165 116 / 0.08) 0%, transparent 50%),
+    linear-gradient(165deg, #3d3228 0%, #2c2419 40%, #1f1812 100%);
+}
+
+.hero-museum__vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 90% 70% at 70% 50%,
+    transparent 30%,
+    rgb(15 12 10 / 0.5) 100%
+  );
+  pointer-events: none;
+}
+
+.hero-museum__light {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 60% 45% at 72% 18%,
+    rgb(255 235 200 / 0.12) 0%,
+    transparent 65%
+  );
+  pointer-events: none;
+}
+
+.hero-museum__grid {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  min-height: 100dvh;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 1024px) {
+  .hero-museum__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.hero-museum__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 6rem 1.5rem 3rem;
+}
+
+@media (min-width: 1024px) {
+  .hero-museum__content {
+    padding: 5rem 2.5rem 4rem 3rem;
+    max-width: 36rem;
+  }
+}
+
+.hero-museum__visual {
+  position: relative;
+  min-height: 420px;
+  padding: 2rem 1rem 4rem;
+}
+
+@media (min-width: 1024px) {
+  .hero-museum__visual {
+    min-height: 100dvh;
+    padding: 4rem 2rem 3rem 0;
+  }
+}
+
+.hero-museum__desk {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 380px;
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+@media (min-width: 1024px) {
+  .hero-museum__desk {
+    max-width: none;
+    min-height: 520px;
+    margin: 0;
+    margin-left: auto;
+  }
+}
+
+/* Статистика — музейные метки */
+.hero-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-top: 2rem;
+  border-top: 1px solid rgb(212 165 116 / 0.2);
+}
+
+.hero-stat {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.75rem 1rem;
+  align-items: baseline;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid rgb(212 165 116 / 0.12);
+}
+
+.hero-stat__icon {
+  font-size: 1rem;
+  opacity: 0.85;
+}
+
+.hero-stat__value {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: #f7f2ea;
+  line-height: 1;
+}
+
+.hero-stat__label {
+  grid-column: 2;
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgb(247 242 234 / 0.45);
+}
+
+/* Кнопки */
+.hero-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 2.25rem;
+}
+
+@media (min-width: 480px) {
+  .hero-actions {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+}
+
+.hero-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.9rem 1.75rem;
+  border-radius: 2px;
+  background: linear-gradient(180deg, #d4a574 0%, #b8864a 100%);
+  color: #1f1812;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  box-shadow: 0 4px 24px rgb(212 165 116 / 0.25);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.hero-btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 32px rgb(212 165 116 / 0.35);
+}
+
+.hero-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  border: 1px solid rgb(247 242 234 / 0.25);
+  border-radius: 2px;
+  color: rgb(247 242 234 / 0.9);
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.hero-btn-secondary:hover {
+  border-color: rgb(212 165 116 / 0.5);
+  background: rgb(247 242 234 / 0.05);
+}
+
+.hero-btn-ghost {
+  font-size: 0.75rem;
+  color: rgb(247 242 234 / 0.55);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  transition: color 0.2s;
+}
+
+.hero-btn-ghost:hover {
+  color: #d4a574;
+}
+
+/* Коллаж — хаотичные позиции */
+.hero-item {
+  position: absolute;
+  box-shadow:
+    2px 4px 8px rgb(0 0 0 / 0.35),
+    0 12px 40px rgb(0 0 0 / 0.2);
+  transition: box-shadow 0.3s;
+  will-change: transform;
+}
+
+.hero-item img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 3px solid #faf6f0;
+  background: #faf6f0;
+}
+
+.hero-item--aes {
+  width: 42%;
+  top: 4%;
+  left: 2%;
+  transform: rotate(-6deg);
+  z-index: 3;
+}
+
+.hero-item--lenin {
+  width: 38%;
+  top: 18%;
+  right: 4%;
+  transform: rotate(4deg);
+  z-index: 4;
+}
+
+.hero-item--school {
+  width: 32%;
+  bottom: 28%;
+  left: 8%;
+  transform: rotate(3deg);
+  z-index: 6;
+}
+
+.hero-item--map {
+  width: 36%;
+  top: 42%;
+  left: 28%;
+  transform: rotate(-2deg);
+  z-index: 2;
+  opacity: 0.92;
+}
+
+.hero-item--map img {
+  border-color: #e8dfd0;
+}
+
+.hero-item--postcard {
+  width: 34%;
+  top: 8%;
+  left: 38%;
+  transform: rotate(8deg);
+  z-index: 7;
+}
+
+.hero-item--memory {
+  width: 30%;
+  bottom: 12%;
+  right: 6%;
+  transform: rotate(-4deg);
+  z-index: 8;
+}
+
+.hero-item--newspaper {
+  width: 40%;
+  bottom: 4%;
+  left: 32%;
+  transform: rotate(-1deg);
+  z-index: 5;
+}
+
+.hero-item--note {
+  width: 26%;
+  top: 52%;
+  right: 2%;
+  transform: rotate(12deg);
+  z-index: 9;
+  box-shadow: 1px 2px 6px rgb(0 0 0 / 0.2);
+}
+
+.hero-item--note img {
+  border: none;
+  background: transparent;
+}
+
+.hero-item--stamp {
+  width: 18%;
+  top: 62%;
+  left: 4%;
+  transform: rotate(-15deg);
+  z-index: 10;
+  box-shadow: none;
+}
+
+.hero-item--stamp img {
+  border: none;
+  background: transparent;
+}
+
+.hero-item__date {
+  position: absolute;
+  bottom: -1.25rem;
+  right: 0.25rem;
+  font-family: var(--font-display);
+  font-size: 0.65rem;
+  color: rgb(247 242 234 / 0.5);
+  letter-spacing: 0.1em;
+}
+
+/* Музейная табличка */
+.hero-plaque {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  z-index: 20;
+  max-width: 200px;
+  padding: 1rem 1.15rem;
+  background: linear-gradient(145deg, #faf6f0 0%, #e8dfd0 100%);
+  border: 1px solid rgb(139 94 60 / 0.35);
+  box-shadow: 0 8px 32px rgb(0 0 0 / 0.35);
+  transform: rotate(1.5deg);
+  transition: transform 0.25s;
+}
+
+.hero-plaque:hover {
+  transform: rotate(0deg) translateY(-2px);
+}
+
+.hero-plaque__eyebrow {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #8b5e3c;
+}
+
+.hero-plaque__title {
+  margin-top: 0.35rem;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #2c2419;
+  line-height: 1.2;
+}
+
+.hero-plaque__year {
+  margin-top: 0.5rem;
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  color: #8b5e3c;
+}
+
+.hero-plaque::before {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  border: 1px solid rgb(139 94 60 / 0.15);
+  pointer-events: none;
+}
+
+/* Тень стола под коллажом */
+.hero-museum__desk-shadow {
+  position: absolute;
+  bottom: 8%;
+  left: 10%;
+  right: 5%;
+  height: 40px;
+  background: radial-gradient(ellipse 80% 100% at 50% 0%, rgb(0 0 0 / 0.35) 0%, transparent 70%);
+  filter: blur(8px);
+  pointer-events: none;
+}

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 240" fill="none">
+  <rect width="200" height="240" fill="#f0e6d8"/>
+  <circle cx="60" cy="90" r="18" fill="#c9a86c" opacity="0.5"/>
+  <circle cx="100" cy="85" r="18" fill="#c9a86c" opacity="0.5"/>
+  <circle cx="140" cy="90" r="18" fill="#c9a86c" opacity="0.5"/>
+  <text x="100" y="220" text-anchor="middle" fill="#8b5e3c" font-family="Georgia,serif" font-size="10">H:>;0 · 1986</text>
+</svg>
