@@ -7,7 +7,6 @@ const links = [
   { to: '/', label: 'Архив', end: true },
   { to: '/map', label: 'Карта памяти' },
   { to: '/then-and-now', label: 'Тогда и сейчас' },
-  { to: '/share', label: 'Поделиться' },
 ];
 
 export default function SiteNav() {
@@ -43,8 +42,14 @@ export default function SiteNav() {
             </NavLink>
           ))}
           <Link
+            to="/share"
+            className="ml-2 rounded-full bg-museum-copper px-4 py-1.5 text-sm font-medium text-museum-cream"
+          >
+            Добавить историю
+          </Link>
+          <Link
             to="/admin"
-            className="ml-2 text-xs text-museum-ink/40 hover:text-museum-copper"
+            className="ml-1 text-xs text-museum-ink/40 hover:text-museum-copper"
           >
             Админ
           </Link>
@@ -81,6 +86,13 @@ export default function SiteNav() {
                   {l.label}
                 </NavLink>
               ))}
+              <Link
+                to="/share"
+                onClick={() => setOpen(false)}
+                className="rounded-lg bg-museum-copper px-3 py-2 text-center text-sm font-medium text-museum-cream"
+              >
+                Добавить историю
+              </Link>
             </div>
           </motion.nav>
         )}

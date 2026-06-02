@@ -47,7 +47,8 @@ export default function HeroSection() {
               Обнинска.
             </p>
             <p className="text-museum-cream/55">
-              Мы создаём первый народный цифровой архив памяти города.
+              Истории создают сами жители — вы тоже можете добавить свою за
+              несколько минут.
             </p>
           </motion.div>
 
@@ -70,8 +71,8 @@ export default function HeroSection() {
               <span aria-hidden>✦</span>
               Экспонат месяца
             </Link>
-            <Link to="/share" className="hero-btn-ghost sm:ml-2">
-              Поделиться воспоминанием
+            <Link to="/share" className="hero-btn-primary sm:ml-0">
+              Добавить свою историю
             </Link>
           </motion.div>
         </div>

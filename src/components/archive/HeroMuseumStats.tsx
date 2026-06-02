@@ -1,10 +1,24 @@
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { ARCHIVE_STATS } from '@/constants/hero';
+import { fetchArchivePublicStats } from '@/api/archiveStats';
+import type { ArchivePublicStats } from '@/types';
 
 export default function HeroMuseumStats() {
+  const [stats, setStats] = useState<ArchivePublicStats | null>(null);
+
+  useEffect(() => {
+    fetchArchivePublicStats().then(setStats);
+  }, []);
+
+  const items = [
+    { icon: '📍', value: stats?.places ?? 20, label: 'мест на карте' },
+    { icon: '📖', value: stats?.memories ?? 0, label: 'воспоминаний' },
+    { icon: '🎯', value: stats?.goal ?? 500, label: 'цель архива' },
+  ];
+
   return (
     <ul className="hero-stats">
-      {ARCHIVE_STATS.map((stat, i) => (
+      {items.map((stat, i) => (
         <motion.li
           key={stat.label}
           className="hero-stat"

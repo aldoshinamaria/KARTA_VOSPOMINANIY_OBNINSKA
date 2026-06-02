@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { fetchApprovedPlaces } from '@/api/places';
 import { uploadMemoryPhoto } from '@/api/photos';
 import { submitMemory } from '@/api/places';
-import { FORM_LIMITS, MEMORY_CATEGORIES } from '@/constants/categories';
+import { CATEGORY_GROUPS, FORM_LIMITS } from '@/constants/categories';
 import { isSupabaseConfigured } from '@/lib/supabase';
 import type { MemoryCategory, MemoryFormData, Place } from '@/types';
 import { validateMemoryForm } from '@/utils/validation';
@@ -98,6 +98,10 @@ export default function ShareStoryForm({ initialPlaceId }: ShareStoryFormProps) 
         await uploadMemoryPhoto(memoryId, files[i], i);
       }
 
+      const submitted =
+        parseInt(localStorage.getItem('obninsk_stories_submitted') ?? '0', 10) + 1;
+      localStorage.setItem('obninsk_stories_submitted', String(submitted));
+
       setDone(true);
       setForm(emptyForm());
       setFiles([]);
@@ -191,10 +195,14 @@ export default function ShareStoryForm({ initialPlaceId }: ShareStoryFormProps) 
             setForm((f) => ({ ...f, category: e.target.value as MemoryCategory }))
           }
         >
-          {MEMORY_CATEGORIES.map((c) => (
-            <option key={c} value={c}>
-              {c}
-            </option>
+          {CATEGORY_GROUPS.map((group) => (
+            <optgroup key={group.label} label={group.label}>
+              {group.items.map((c) => (
+                <option key={c} value={c}>
+                  {c}
+                </option>
+              ))}
+            </optgroup>
           ))}
         </select>
       </Field>

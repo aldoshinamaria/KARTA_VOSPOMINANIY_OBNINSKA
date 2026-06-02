@@ -12,6 +12,7 @@ import {
   adminDeletePlace,
   adminFetchMemories,
   adminFetchPlaces,
+  adminUpdateMemoryFlags,
   adminUpdateMemoryStatus,
   adminUpdatePlaceStatus,
   verifyAdminPassword,
@@ -270,6 +271,14 @@ export default function AdminPage() {
                     }
                   }}
                 />
+                <MemoryPublicationFlags
+                  memory={m}
+                  onUpdate={(flags) =>
+                    runAction(() =>
+                      adminUpdateMemoryFlags(password, m.id, flags),
+                    )
+                  }
+                />
               </motion.li>
             ))}
           </ul>
@@ -333,6 +342,55 @@ function StatusBadge({ status }: { status: ModerationStatus }) {
     >
       {labels[status]}
     </span>
+  );
+}
+
+function MemoryPublicationFlags({
+  memory,
+  onUpdate,
+}: {
+  memory: Memory;
+  onUpdate: (flags: {
+    featured_story?: boolean;
+    show_on_map?: boolean;
+    published_archive?: boolean;
+    status?: ModerationStatus;
+  }) => void;
+}) {
+  return (
+    <div className="admin-flags">
+      <span className="w-full text-[10px] uppercase tracking-wider text-museum-ink/45">
+        Публикация
+      </span>
+      <button
+        type="button"
+        className={memory.featured_story ? 'is-on' : ''}
+        onClick={() => onUpdate({ featured_story: !memory.featured_story })}
+      >
+        История дня
+      </button>
+      <button
+        type="button"
+        className={memory.show_on_map !== false ? 'is-on' : ''}
+        onClick={() => onUpdate({ show_on_map: !memory.show_on_map })}
+      >
+        На карте
+      </button>
+      <button
+        type="button"
+        className={memory.published_archive !== false ? 'is-on' : ''}
+        onClick={() =>
+          onUpdate({ published_archive: !memory.published_archive })
+        }
+      >
+        В архиве
+      </button>
+      {memory.status === 'pending' && (
+        <button type="button" onClick={() => onUpdate({ status: 'pending' })}>
+          На проверке
+        </button>
+      )}
+    </div>
   );
 }
 

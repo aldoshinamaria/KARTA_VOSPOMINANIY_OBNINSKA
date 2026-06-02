@@ -24,6 +24,12 @@ function mapMemory(row: Record<string, unknown>): Memory {
     story: String(row.story),
     status: row.status as Memory['status'],
     created_at: String(row.created_at),
+    featured_story: Boolean(row.featured_story),
+    pull_quote: row.pull_quote ? String(row.pull_quote) : null,
+    view_count: row.view_count != null ? Number(row.view_count) : 0,
+    likes: row.likes != null ? Number(row.likes) : 0,
+    show_on_map: row.show_on_map !== false,
+    published_archive: row.published_archive !== false,
   };
 }
 
@@ -115,6 +121,34 @@ export async function adminDeletePlace(
   const { error } = await supabase.rpc('admin_delete_place', {
     admin_pass: password,
     place_id: placeId,
+  });
+
+  if (error) throw error;
+}
+
+export interface MemoryPublicationFlags {
+  featured_story?: boolean;
+  pull_quote?: string;
+  show_on_map?: boolean;
+  published_archive?: boolean;
+  status?: 'pending' | 'approved' | 'rejected';
+}
+
+export async function adminUpdateMemoryFlags(
+  password: string,
+  memoryId: string,
+  flags: MemoryPublicationFlags,
+): Promise<void> {
+  if (!isSupabaseConfigured || !supabase) return;
+
+  const { error } = await supabase.rpc('admin_update_memory_flags', {
+    admin_pass: password,
+    memory_id: memoryId,
+    p_featured_story: flags.featured_story ?? null,
+    p_pull_quote: flags.pull_quote ?? null,
+    p_show_on_map: flags.show_on_map ?? null,
+    p_published_archive: flags.published_archive ?? null,
+    p_new_status: flags.status ?? null,
   });
 
   if (error) throw error;

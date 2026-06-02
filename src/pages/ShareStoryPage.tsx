@@ -1,6 +1,8 @@
 import { useSearchParams } from 'react-router-dom';
 import PageMeta from '@/components/layout/PageMeta';
 import ShareStoryForm from '@/components/story/ShareStoryForm';
+import ContributorBadges from '@/components/engagement/ContributorBadges';
+import ViralInvite from '@/components/engagement/ViralInvite';
 
 export default function ShareStoryPage() {
   const [params] = useSearchParams();
@@ -18,15 +20,19 @@ export default function ShareStoryPage() {
           Ваш вклад в архив
         </p>
         <h1 className="mt-2 font-display text-4xl font-semibold text-museum-ink">
-          Поделиться историей
+          У вас тоже есть такая история?
         </h1>
         <p className="mt-4 text-museum-ink/65">
-          Старые фото, семейные истории, школьные воспоминания — всё, что хранит
-          память о городе, важно сохранить.
+          5–10 минут — и ваше воспоминание станет частью народного архива Обнинска.
+          Можно приложить до 5 фотографий из семейного альбома.
         </p>
-        <div className="mt-10">
+
+        <div className="mt-10 grid gap-10 lg:grid-cols-[1fr_220px]">
           <ShareStoryForm initialPlaceId={placeId} />
+          <ContributorBadges />
         </div>
+
+        <ViralInvite />
       </div>
     </>
   );

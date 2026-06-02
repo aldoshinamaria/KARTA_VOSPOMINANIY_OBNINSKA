@@ -15,22 +15,30 @@ export default function MapTeaser() {
       />
       <div className="relative max-w-xl">
         <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-museum-copper">
-          Навигация по историям
+          Главный актив архива
         </p>
         <h3 className="mt-2 font-display text-3xl font-semibold text-museum-ink">
           Карта памяти
         </h3>
         <p className="mt-3 text-sm leading-relaxed text-museum-ink/65 sm:text-base">
-          Карта помогает найти место и прочитать все истории, связанные с ним: фото,
-          описание и воспоминания жителей. Это не главный экран — это путь к архиву.
+          Каждая точка — живые истории жителей. Откройте популярные места,
+          пройдите маршрут по старому Обнинску и найдите свой двор или школу.
         </p>
-        <Link
-          to="/map"
-          className="mt-6 inline-flex items-center gap-2 rounded-full bg-museum-copper px-6 py-3 text-sm font-medium text-museum-cream transition hover:bg-museum-copper/90"
-        >
-          Открыть карту памяти
-          <span aria-hidden>→</span>
-        </Link>
+        <div className="mt-6 flex flex-wrap gap-3">
+          <Link
+            to="/map"
+            className="inline-flex items-center gap-2 rounded-full bg-museum-copper px-6 py-3 text-sm font-medium text-museum-cream transition hover:bg-museum-copper/90"
+          >
+            Открыть карту памяти
+            <span aria-hidden>→</span>
+          </Link>
+          <Link
+            to="/share"
+            className="inline-flex items-center rounded-full border border-museum-copper/30 px-5 py-3 text-sm text-museum-copper"
+          >
+            Привязать историю к месту
+          </Link>
+        </div>
       </div>
       <div
         className="mt-8 h-40 rounded-2xl border border-museum-copper/10 bg-[url('/archive/map-teaser-pattern.svg')] bg-cover bg-center opacity-90 sm:absolute sm:bottom-8 sm:right-8 sm:mt-0 sm:h-44 sm:w-72"

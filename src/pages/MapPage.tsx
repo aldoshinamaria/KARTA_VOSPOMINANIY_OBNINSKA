@@ -3,6 +3,8 @@ import { Link, useSearchParams } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { fetchApprovedPlaces } from '@/api/places';
 import PageMeta from '@/components/layout/PageMeta';
+import MapMemoryRoutes from '@/components/map/MapMemoryRoutes';
+import MapPopularPlaces from '@/components/map/MapPopularPlaces';
 import PlacePanel from '@/components/place/PlacePanel';
 import type { Place } from '@/types';
 
@@ -51,13 +53,30 @@ export default function MapPage() {
             Карта памяти
           </h1>
           <p className="mt-2 max-w-2xl text-sm text-museum-ink/65">
-            Выберите точку — откроются истории места. Подробная страница — по ссылке
-            внутри карточки.
+            Выберите точку — читайте истории, ставьте реакции, добавляйте своё
+            воспоминание. Следующая история — в один клик.
           </p>
+          <Link
+            to="/share"
+            className="mt-4 inline-block rounded-full bg-museum-copper px-5 py-2 text-xs font-semibold uppercase tracking-wide text-museum-cream"
+          >
+            Добавить историю к месту
+          </Link>
         </div>
       </div>
 
-      <div className="flex min-h-[calc(100dvh-12rem)] flex-col lg:min-h-[70vh] lg:flex-row">
+      <div className="mx-auto flex max-w-6xl min-h-[calc(100dvh-12rem)] flex-col gap-0 lg:min-h-[70vh] lg:flex-row">
+        <aside className="hidden shrink-0 overflow-y-auto border-r border-museum-copper/10 bg-museum-cream/50 px-4 py-6 lg:block lg:w-64">
+          <MapPopularPlaces
+            onSelectPlace={(id) => {
+              const place = places.find((p) => p.id === id);
+              if (place) setSelectedPlace(place);
+            }}
+          />
+          <MapMemoryRoutes />
+        </aside>
+
+        <div className="flex min-h-[50vh] flex-1 flex-col lg:min-h-0 lg:flex-row">
         <div
           className={`relative min-h-[50vh] flex-1 lg:min-h-0 ${
             selectedPlace ? 'lg:flex-[1.5]' : ''
@@ -111,6 +130,16 @@ export default function MapPage() {
             </motion.div>
           )}
         </AnimatePresence>
+        </div>
+
+        <div className="border-t border-museum-copper/10 px-4 py-6 lg:hidden">
+          <MapPopularPlaces
+            onSelectPlace={(id) => {
+              const place = places.find((p) => p.id === id);
+              if (place) setSelectedPlace(place);
+            }}
+          />
+        </div>
       </div>
     </>
   );

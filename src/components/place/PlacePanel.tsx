@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import { storyExcerpt } from '@/data/demoMemories';
 import {
   fetchApprovedMemoriesForPlace,
   fetchApprovedMemoryCount,
@@ -146,8 +148,14 @@ export default function PlacePanel({
                   </div>
                   <p className="mt-1 text-xs text-museum-copper">{m.name}</p>
                   <p className="mt-2 text-sm leading-relaxed text-museum-ink/75">
-                    {m.story}
+                    {storyExcerpt(m.story, 160)}
                   </p>
+                  <Link
+                    to={`/story/${m.id}`}
+                    className="mt-2 inline-block text-xs font-medium text-museum-copper hover:underline"
+                  >
+                    Читать полностью →
+                  </Link>
                 </motion.li>
               ))}
             </ul>

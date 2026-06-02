@@ -1,3 +1,7 @@
+import type { MemoryCategory as MemoryCategoryType } from '@/constants/categories';
+
+export type { MemoryCategoryType as MemoryCategory };
+
 export type ModerationStatus = 'pending' | 'approved' | 'rejected';
 
 export interface Place {
@@ -16,7 +20,7 @@ export interface Memory {
   id: string;
   place_id: string;
   name: string;
-  category: MemoryCategory;
+  category: MemoryCategoryType;
   year: number;
   title: string;
   story: string;
@@ -27,6 +31,9 @@ export interface Memory {
   featured_story?: boolean;
   pull_quote?: string | null;
   view_count?: number;
+  likes?: number;
+  show_on_map?: boolean;
+  published_archive?: boolean;
 }
 
 export interface MuseumExhibitMeta {
@@ -91,35 +98,55 @@ export interface SeedPlace {
   lng: number;
 }
 
-export type MemoryCategory =
-  | 'Детство'
-  | 'Школьные годы'
-  | 'Семья'
-  | 'Любимое место'
-  | 'История города'
-  | 'Работа'
-  | 'Культура'
-  | 'Спорт'
-  | 'Исчезнувший Обнинск';
+export {
+  VANISHED_CATEGORY,
+  RESIDENT_CATEGORIES,
+  MEMORY_CATEGORIES,
+} from '@/constants/categories';
+
+export type ReactionType =
+  | 'dear'
+  | 'remember'
+  | 'important'
+  | 'studied'
+  | 'lived_nearby';
+
+export interface ReactionCounts {
+  dear: number;
+  remember: number;
+  important: number;
+  studied: number;
+  lived_nearby: number;
+}
+
+export interface ArchivePublicStats {
+  places: number;
+  memories: number;
+  views: number;
+  pending: number;
+  goal: number;
+}
+
+export interface PopularPlace {
+  place_id: string;
+  place_title: string;
+  memory_count: number;
+  total_views: number;
+}
+
+export interface MemoryRoute {
+  id: string;
+  title: string;
+  description: string;
+  place_ids: string[];
+  era?: string;
+}
 
 export interface MemoryFormData {
   name: string;
-  category: MemoryCategory;
+  category: import('@/constants/categories').MemoryCategory;
   year: number;
   title: string;
   story: string;
   place_id: string;
 }
-
-export const VANISHED_CATEGORY: MemoryCategory = 'Исчезнувший Обнинск';
-
-export const RESIDENT_CATEGORIES: MemoryCategory[] = [
-  'Детство',
-  'Школьные годы',
-  'Семья',
-  'Любимое место',
-  'История города',
-  'Работа',
-  'Культура',
-  'Спорт',
-];
