@@ -27,7 +27,7 @@
   height: 280px;
   top: 8%;
   right: 5%;
-  background-image: url('/archive/hero/stamp.png');
+  background-image: var(--story-ghost-stamp);
   transform: rotate(12deg);
 }
 
@@ -36,7 +36,7 @@
   height: 280px;
   bottom: 10%;
   left: -4%;
-  background-image: url('/archive/hero/fragment-map.png');
+  background-image: var(--story-ghost-map);
   transform: rotate(-8deg);
 }
 
@@ -45,7 +45,7 @@
   height: 160px;
   top: 40%;
   left: 42%;
-  background-image: url('/archive/hero/hand-note.png');
+  background-image: var(--story-ghost-note);
   transform: rotate(-4deg);
 }
 
@@ -54,7 +54,7 @@
   height: 140px;
   bottom: 18%;
   right: 28%;
-  background-image: url('/archive/hero/postcard.png');
+  background-image: var(--story-ghost-photo);
   transform: rotate(6deg);
   opacity: 0.035;
 }

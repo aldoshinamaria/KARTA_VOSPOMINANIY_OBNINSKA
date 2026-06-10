@@ -1,8 +1,9 @@
 import type { MemoryObjectExhibit } from '@/types/exhibit';
+import { assetUrl } from '@/utils/assetUrl';
 
 export const SPUTNIK_PLACE_ID = 'a1000001-0001-4001-8001-000000000017';
 
-const img = (name: string) => `/archive/exhibits/sputnik/${name}`;
+const img = (name: string) => assetUrl(`/archive/exhibits/sputnik/${name}`);
 
 /** Демонстрационный экспонат: Кинотеатр «Спутник» */
 export const sputnikExhibit: MemoryObjectExhibit = {

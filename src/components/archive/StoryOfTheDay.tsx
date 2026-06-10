@@ -9,6 +9,7 @@ import {
 import type { Memory, StoryOfTheDayPayload } from '@/types';
 
 import '@/styles/story-of-the-day.css';
+import { assetUrl } from '@/utils/assetUrl';
 
 const EASE_MUSEUM = [0.22, 1, 0.36, 1] as const;
 
@@ -119,6 +120,14 @@ export default function StoryOfTheDay() {
       className="story-day"
       id="story-of-the-day"
       aria-labelledby="story-day-heading"
+      style={
+        {
+          '--story-ghost-stamp': `url(${assetUrl('/archive/hero/stamp.png')})`,
+          '--story-ghost-map': `url(${assetUrl('/archive/hero/fragment-map.png')})`,
+          '--story-ghost-note': `url(${assetUrl('/archive/hero/hand-note.png')})`,
+          '--story-ghost-photo': `url(${assetUrl('/archive/hero/postcard.png')})`,
+        } as React.CSSProperties
+      }
     >
       <div className="story-day__ghosts" aria-hidden>
         <div className="story-day__ghost story-day__ghost--stamp" />

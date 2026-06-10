@@ -1,3 +1,5 @@
+import { assetUrl } from '@/utils/assetUrl';
+
 /** Элементы коллажа «рабочий стол архивиста» — позиции и глубина параллакса */
 export interface CollageItem {
   id: string;
@@ -8,7 +10,7 @@ export interface CollageItem {
   label?: string;
 }
 
-const base = '/archive/hero';
+const base = assetUrl('/archive/hero');
 
 export const heroCollageItems: CollageItem[] = [
   {

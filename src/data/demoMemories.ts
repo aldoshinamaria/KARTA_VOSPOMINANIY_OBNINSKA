@@ -1,4 +1,5 @@
 import type { Memory, ThenNowPair } from '@/types';
+import { assetUrl } from '@/utils/assetUrl';
 
 /** Демо-истории для лендинга без Supabase */
 export const demoMemories: Memory[] = [
@@ -88,26 +89,26 @@ export const demoThenNow: ThenNowPair[] = [
     title: 'Площадь Ленина',
     description: 'Главная площадь города: праздники, встречи, городская жизнь.',
     place_id: 'a1000001-0001-4001-8001-000000000015',
-    before_image_path: '/archive/placeholder-before.svg',
-    after_image_path: '/archive/placeholder-after.svg',
+    before_image_path: assetUrl('/archive/placeholder-before.svg'),
+    after_image_path: assetUrl('/archive/placeholder-after.svg'),
     year: 1980,
     status: 'approved',
     created_at: '2026-01-01T00:00:00Z',
-    before_url: '/archive/placeholder-before.svg',
-    after_url: '/archive/placeholder-after.svg',
+    before_url: assetUrl('/archive/placeholder-before.svg'),
+    after_url: assetUrl('/archive/placeholder-after.svg'),
   },
   {
     id: 'demo-tn2',
     title: 'Городской парк у пруда',
     description: 'Место прогулок нескольких поколений обнинцев.',
     place_id: 'a1000001-0001-4001-8001-000000000005',
-    before_image_path: '/archive/placeholder-before.svg',
-    after_image_path: '/archive/placeholder-after.svg',
+    before_image_path: assetUrl('/archive/placeholder-before.svg'),
+    after_image_path: assetUrl('/archive/placeholder-after.svg'),
     year: 1975,
     status: 'approved',
     created_at: '2026-01-01T00:00:00Z',
-    before_url: '/archive/placeholder-before.svg',
-    after_url: '/archive/placeholder-after.svg',
+    before_url: assetUrl('/archive/placeholder-before.svg'),
+    after_url: assetUrl('/archive/placeholder-after.svg'),
   },
 ];
 

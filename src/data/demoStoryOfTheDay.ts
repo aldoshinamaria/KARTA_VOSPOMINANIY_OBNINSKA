@@ -1,4 +1,5 @@
 import type { Memory } from '@/types';
+import { assetUrl } from '@/utils/assetUrl';
 
 /** Закреплённый демо-экспонат «История дня» */
 export const demoStoryOfTheDayMemory: Memory = {
@@ -18,7 +19,7 @@ export const demoStoryOfTheDayMemory: Memory = {
     'Вечером фонари отражались в льду — казалось, что город тихий и добрый.',
 };
 
-export const DEMO_STORY_IMAGE = '/archive/hero/photo-lenin.png';
+export const DEMO_STORY_IMAGE = assetUrl('/archive/hero/photo-lenin.png');
 
 export const DEMO_ARCHIVE_STATS = {
   todayReads: 127,

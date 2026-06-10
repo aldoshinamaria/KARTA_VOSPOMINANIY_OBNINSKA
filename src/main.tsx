@@ -15,7 +15,7 @@ if (!root) {
 
 createRoot(root).render(
   <ErrorBoundary>
-    <BrowserRouter>
+    <BrowserRouter basename={import.meta.env.BASE_URL.replace(/\/$/, '') || undefined}>
       <App />
     </BrowserRouter>
   </ErrorBoundary>,

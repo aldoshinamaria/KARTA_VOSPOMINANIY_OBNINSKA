@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { assetUrl } from '@/utils/assetUrl';
 
 export default function MapTeaser() {
   return (
@@ -41,7 +42,8 @@ export default function MapTeaser() {
         </div>
       </div>
       <div
-        className="mt-8 h-40 rounded-2xl border border-museum-copper/10 bg-[url('/archive/map-teaser-pattern.svg')] bg-cover bg-center opacity-90 sm:absolute sm:bottom-8 sm:right-8 sm:mt-0 sm:h-44 sm:w-72"
+        className="mt-8 h-40 rounded-2xl border border-museum-copper/10 bg-cover bg-center opacity-90 sm:absolute sm:bottom-8 sm:right-8 sm:mt-0 sm:h-44 sm:w-72"
+        style={{ backgroundImage: `url(${assetUrl('/archive/map-teaser-pattern.svg')})` }}
         aria-hidden
       />
     </motion.div>
